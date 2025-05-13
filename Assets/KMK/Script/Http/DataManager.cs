@@ -26,7 +26,7 @@ public struct UserLogin
 }
 
 [Serializable]
-public struct UserLiginResponse
+public struct UserLoginResponse
 {
     public int userid;
     public string name;
@@ -56,6 +56,17 @@ public struct ResponseAI
 
 public class DataManager : MonoBehaviour
 {
+    public static DataManager datamg;
+
     public UserRequest request;
     public UserID userId;
+
+    public UserLogin userLogin;
+    public UserLoginResponse userLoginResponse;
+
+    private void Awake()
+    {
+        
+    }
+
 }
