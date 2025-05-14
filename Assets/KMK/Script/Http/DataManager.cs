@@ -66,7 +66,12 @@ public class DataManager : MonoBehaviour
 
     private void Awake()
     {
-        
+        if (datamg == null) datamg = this;
+        else Destroy(gameObject);
+        //싱글턴
+
+        DontDestroyOnLoad(gameObject);
+        Debug.Log("DontDestroyOnLoad상에 DataManager 생성 :: 백엔드 통신관리 및 통신정보 저장소");
     }
 
 }

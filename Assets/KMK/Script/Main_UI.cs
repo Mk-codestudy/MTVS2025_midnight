@@ -1,5 +1,8 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System.Threading.Tasks;
 
 public class Main_UI : MonoBehaviour
 {
@@ -7,52 +10,82 @@ public class Main_UI : MonoBehaviour
     // B버튼을 누르면 뒤로
 
     public int menuNum;
-
     public GameObject[] contentUI;
+
+    public TMP_InputField[] loginFields;
+    public TMP_InputField[] joinFields;
 
     void Start()
     {
         menuNum = 0;
+        contentUI[0].SetActive(true);
     }
 
     void Update()
     {
-        SwapKey();
-        Twinkle();
+        if (contentUI[0].activeSelf && Input.GetKeyDown(KeyCode.A)) // 첫 번째 메인화면 넘기기 (메인 로고 떠있으면서 a키를 누르면...)
+        {
+            contentUI[0].SetActive(false);
+            contentUI[1].SetActive(true);
+        }
+
+        if (contentUI[3].activeSelf && Input.GetKeyDown(KeyCode.A))
+        {
+            contentUI[3].SetActive(false);
+            contentUI[4].SetActive(true);
+        }
+
 
     }
 
-    void SwapKey()
+    //로그인 버튼
+    public async void Login_btn() //로그인은 contentUI 1번
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        //인풋필드의 텍스트들 클래스에 밀어넣고
+        UserLogin userLogin = new UserLogin();
+        userLogin.id = loginFields[0].text;
+        print("userLogin.id :: " + userLogin.id);
+        print("loginFields[0] :: " + loginFields[0].text);
+        userLogin.password = loginFields[1].text;
+
+        //데이터매니저에 저장하고
+        DataManager.datamg.userLogin = userLogin;
+
+        // 비동기 로그인 요청
+        bool loginSuccess = await HTTPMnanger.htpmg.PostLogin(userLogin);
+
+        if (loginSuccess)
         {
-            if (menuNum < (contentUI.Length - 1))
-            {
-                menuNum++;
-            }
+            // 로딩 표시 띄우면 좋긴할텐데
+            contentUI[1].SetActive(false);
+            contentUI[3].SetActive(true);
         }
-        else if (Input.GetKeyDown(KeyCode.B))
+        else
         {
-            if (menuNum > 0)
-            {
-                menuNum--;
-            }
+            Debug.LogError("로그인 통신 실패!!!!!!!!!");
         }
     }
 
-    void Twinkle() //아웃라인 리스트의 dinoListnum번째 게임오브젝트만 활성화하는 함수
+    //회원가입 버튼
+    public void Join_GetMenu_btn()
     {
-        for (int i = 0; i < contentUI.Length; i++)
-        {
-            if (i == menuNum)
-            {
-                contentUI[i].SetActive(true);
-            }
-            else
-            {
-                contentUI[i].SetActive(false);
-            }
-        }
+        contentUI[1].SetActive(false); //로그인 끄고
+        contentUI[2].SetActive(true); //회원가입 켠다
     }
 
+    public void Join_Post_btn()
+    {
+        UserRequest join = new UserRequest();
+        join.id = joinFields[0].text; //Id
+        join.password = joinFields[1].text; //패스워드
+        join.name = joinFields[2].text; //이름
+
+        DataManager.datamg.request = join; //데이터 매니저에 저장하기
+        HTTPMnanger.htpmg.PostJoin(join).Forget(); //통신에 요청보내기
+
+
+        //귀찮으니까 통신이 잘됐던 안됐던 걍 넘어갑시다
+        contentUI[2].SetActive(false);
+        contentUI[3].SetActive(true);
+    }
 }

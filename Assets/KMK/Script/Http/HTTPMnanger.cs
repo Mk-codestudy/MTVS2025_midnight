@@ -10,9 +10,22 @@ public class HTTPMnanger : MonoBehaviour
     public static HTTPMnanger htpmg;
     public string url; //통신 링크
 
+    public bool loginSuccess;
+
+
     [Header("테스트용 클래스")]
     public UserRequest user;
-    UserLogin userLogin;
+    //UserLogin userLogin;
+
+    private void Awake()
+    {
+        if (htpmg == null) htpmg = this;
+        else Destroy(gameObject);
+        //싱글턴
+
+        DontDestroyOnLoad(gameObject);
+        Debug.Log("DontDestroyOnLoad상에 HttpManager 생성 :: 백엔드 통신관리 및 통신정보 저장소");
+    }
 
     void Start()
     {
@@ -21,21 +34,21 @@ public class HTTPMnanger : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            PostJoin().Forget();
-        }
+
     }
 
 
     // 회원가입
-    public async UniTaskVoid PostJoin()
+    public async UniTaskVoid PostJoin(UserRequest userRequest)
     {
         string urls = url + "/userjoin";
         Debug.Log("PostJoin 설정!" + urls);
-        UserID? response = await Post_Join_async(urls, user);
+        UserID? response = await Post_Join_async(urls, userRequest);
         if (response.HasValue)
+        {
+            DataManager.datamg.userId = response.Value;
             Debug.Log($"UserId: {response.Value.userId}");
+        }
         else
             Debug.Log("응답이 없습니다.");
     }
@@ -72,15 +85,22 @@ public class HTTPMnanger : MonoBehaviour
 
 
     // 로그인
-    public async UniTaskVoid PostLogin()
+    public async UniTask<bool> PostLogin(UserLogin userLogin)
     {
         string urls = url + "/userlogin";
         Debug.Log("PostJoin 설정!" + urls);
         UserLoginResponse? response = await Post_Login_async(urls, userLogin);
         if (response.HasValue)
+        {
             Debug.Log($"Login_info: {response}");
+            loginSuccess = true;
+            return true;
+        }
         else
+        {
             Debug.Log("응답이 없습니다.");
+            return false;
+        }
     }
 
 

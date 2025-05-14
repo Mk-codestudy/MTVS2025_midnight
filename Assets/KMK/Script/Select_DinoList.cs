@@ -14,16 +14,21 @@ public class Select_DinoList : MonoBehaviour
     public int dinoListnum;
     bool isSwapped;
 
+    public GameObject setactive;
+
 
     void Start()
     {
-        
+        isSwapped = true;
     }
 
     void Update()
     {
-        SwapNum();
-        Twinkle();
+        if (setactive.activeSelf)
+        {
+            SwapNum();
+            Twinkle();
+        }
     }
 
     void SwapNum()
@@ -41,7 +46,7 @@ public class Select_DinoList : MonoBehaviour
             }
         }
 
-        if ( !isSwapped && x != 0)
+        if (!isSwapped && x != 0)
         {
             if (x > 0) // 오른쪽으로 갔을 때
             {
@@ -82,7 +87,7 @@ public class Select_DinoList : MonoBehaviour
             }
             else
             {
-                dinoList[i].SetActive (false);
+                dinoList[i].SetActive(false);
             }
         }
     }
