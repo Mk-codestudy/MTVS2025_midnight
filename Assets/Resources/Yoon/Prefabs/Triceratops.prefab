@@ -9,6 +9,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 32b76792c4832a34ea31dc2e586141f3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 32b76792c4832a34ea31dc2e586141f3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 32b76792c4832a34ea31dc2e586141f3, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 32b76792c4832a34ea31dc2e586141f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -48,6 +60,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 32b76792c4832a34ea31dc2e586141f3, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 32b76792c4832a34ea31dc2e586141f3, type: 3}
       propertyPath: m_Name
       value: Triceratops
@@ -59,6 +75,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 32b76792c4832a34ea31dc2e586141f3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3599048535875310516}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 32b76792c4832a34ea31dc2e586141f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3629119325639194019}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 32b76792c4832a34ea31dc2e586141f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -4339824650842111439}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 32b76792c4832a34ea31dc2e586141f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1876076904766469724}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 32b76792c4832a34ea31dc2e586141f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8976275600412932655}
   m_SourcePrefab: {fileID: 100100000, guid: 32b76792c4832a34ea31dc2e586141f3, type: 3}
 --- !u!1 &1815643731483558120 stripped
 GameObject:
@@ -87,3 +115,73 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!195 &-3629119325639194019
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815643731483558120}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.7
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: -0.01
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &-4339824650842111439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815643731483558120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 677ece5711f659d4fa5697f5770f3f6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dinosaurAnimationScript: {fileID: 0}
+  target: {fileID: 0}
+--- !u!114 &-1876076904766469724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815643731483558120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39075b1592a0a5f488405db7622b93e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+--- !u!135 &8976275600412932655
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815643731483558120}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 1.05}

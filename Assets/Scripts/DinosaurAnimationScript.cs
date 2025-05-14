@@ -9,4 +9,10 @@ public class DinosaurAnimationScript : MonoBehaviour
     {
         anim = GetComponent<Animator>();
     }
+
+
+    public void SetAnimation(int num)
+    {
+        anim.SetInteger("count", num);
+    }
 }

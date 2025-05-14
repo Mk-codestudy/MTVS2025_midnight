@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - target
+  - target_2
+  - target_0
+  - target_1
   layers:
   - Default
   - TransparentFX
