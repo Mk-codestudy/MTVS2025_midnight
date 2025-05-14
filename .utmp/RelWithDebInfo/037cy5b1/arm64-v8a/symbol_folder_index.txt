@@ -1,0 +1,1 @@
+C:\github\MTVS2025_midnight\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\build\intermediates\cxx\RelWithDebInfo\037cy5b1\obj\arm64-v8a

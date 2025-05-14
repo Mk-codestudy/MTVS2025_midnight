@@ -18,13 +18,9 @@ public class Main_UI : MonoBehaviour
     void Start()
     {
         //menuNum = 0;
-        //contentUI[0].SetActive(true);
-    }
-
-    private void OnEnable()
-    {
         contentUI[0].SetActive(true);
     }
+
 
     void Update()
     {

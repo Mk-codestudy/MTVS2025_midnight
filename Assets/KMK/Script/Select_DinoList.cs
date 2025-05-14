@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Select_DinoList : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class Select_DinoList : MonoBehaviour
 
     public GameObject setactive;
 
+    public List<GameObject> mappingmodels;
+
     void Start()
     {
         isSwapped = true;
@@ -26,7 +29,29 @@ public class Select_DinoList : MonoBehaviour
             SwapNum();
             Twinkle();
         }
+        if (OVRInput.GetDown(OVRInput.RawButton.A))
+        {
+            SetModel(dinoListnum);
+        }
     }
+
+    public void SetModel(int num)
+    {
+        mappingmodels[num].SetActive(true);
+        UIManager.Instance.currentdinosaurnum = num;
+        GameManager.Instance.currentdinosaurnum = num;
+        UIManager.Instance.number = 5;
+        UIManager.Instance.SetDinosaurUI(num, true);
+        UIManager.Instance.SetOnOffUI(1, true);
+        UIManager.Instance.SetOnOffUI(0, false);
+    }
+
+    public void CloseModel(int num)
+    {
+        mappingmodels[num].SetActive(false);
+    }
+
+    
 
     void SwapNum()
     {
