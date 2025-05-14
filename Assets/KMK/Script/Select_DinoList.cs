@@ -2,8 +2,6 @@
 
 public class Select_DinoList : MonoBehaviour
 {
-    //좌우키로 움직일때마다 List Swap
-
     float currentTime = 0;
 
     [Header("칸 이동 딜레이 시간")]
@@ -15,7 +13,6 @@ public class Select_DinoList : MonoBehaviour
     bool isSwapped;
 
     public GameObject setactive;
-
 
     void Start()
     {
@@ -33,64 +30,42 @@ public class Select_DinoList : MonoBehaviour
 
     void SwapNum()
     {
-        float x = Input.GetAxis("Horizontal");
-        print(x);
+        // 🎯 오른손 조이스틱 X축
+        float x = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick).x;
 
-        if (isSwapped) //스왑 한번 하면
+        if (isSwapped)
         {
-            currentTime += Time.deltaTime; //0.3초만큼 기다리
-            if (currentTime > delayTime) //기다리고 나면 리셋
+            currentTime += Time.deltaTime;
+            if (currentTime > delayTime)
             {
                 isSwapped = false;
                 currentTime = 0;
             }
         }
 
-        if (!isSwapped && x != 0)
+        if (!isSwapped && Mathf.Abs(x) > 0.5f) // 슬라이드 감지
         {
-            if (x > 0) // 오른쪽으로 갔을 때
-            {
-                isSwapped = true;
+            isSwapped = true;
 
-                if (dinoListnum >= 2)
-                {
-                    dinoListnum = 0;
-                }
-                else
-                {
-                    dinoListnum++;
-                }
-            }
-
-            if (x < 0) // 왼쪽으로 갔을 때
+            if (x > 0)
             {
-                isSwapped = true;
-                if (dinoListnum <= 0)
-                {
-                    dinoListnum = 2;
-                }
-                else
-                {
-                    dinoListnum--;
-                }
-            }
-        }
-    }
-
-    void Twinkle() //아웃라인 리스트의 dinoListnum번째 게임오브젝트만 활성화하는 함수
-    {
-        for (int i = 0; i < dinoList.Length; i++)
-        {
-            if (i == dinoListnum)
-            {
-                dinoList[i].SetActive(true);
+                // 오른쪽으로 이동
+                dinoListnum = (dinoListnum + 1) % dinoList.Length;
             }
             else
             {
-                dinoList[i].SetActive(false);
+                // 왼쪽으로 이동
+                dinoListnum = (dinoListnum - 1 + dinoList.Length) % dinoList.Length;
             }
         }
     }
 
+    void Twinkle()
+    {
+        for (int i = 0; i < dinoList.Length; i++)
+        {
+            dinoList[i].SetActive(i == dinoListnum);
+        }
+    }
 
 }

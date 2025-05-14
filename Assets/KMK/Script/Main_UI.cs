@@ -17,25 +17,28 @@ public class Main_UI : MonoBehaviour
 
     void Start()
     {
-        menuNum = 0;
+        //menuNum = 0;
+        //contentUI[0].SetActive(true);
+    }
+
+    private void OnEnable()
+    {
         contentUI[0].SetActive(true);
     }
 
     void Update()
     {
-        if (contentUI[0].activeSelf && Input.GetKeyDown(KeyCode.A)) // 첫 번째 메인화면 넘기기 (메인 로고 떠있으면서 a키를 누르면...)
-        {
-            contentUI[0].SetActive(false);
-            contentUI[1].SetActive(true);
-        }
+        //if (contentUI[0].activeSelf && Input.GetKeyDown(KeyCode.A)) // 첫 번째 메인화면 넘기기 (메인 로고 떠있으면서 a키를 누르면...)
+        //{
+        //    contentUI[0].SetActive(false);
+        //    contentUI[1].SetActive(true);
+        //}
 
-        if (contentUI[3].activeSelf && Input.GetKeyDown(KeyCode.A))
-        {
-            contentUI[3].SetActive(false);
-            contentUI[4].SetActive(true);
-        }
-
-
+        //if (contentUI[3].activeSelf && Input.GetKeyDown(KeyCode.A))
+        //{
+        //    contentUI[3].SetActive(false);
+        //    contentUI[4].SetActive(true);
+        //}
     }
 
     //로그인 버튼
@@ -66,9 +69,26 @@ public class Main_UI : MonoBehaviour
         }
     }
 
+    // intro -> list
+    public void Go_to_List_GetMenu_btn()
+    {
+        contentUI[3].SetActive(false);
+        contentUI[4].SetActive(true);
+        UIManager.Instance.number = 4;
+    }
+
+    //메인화면 넘기기 버튼
+    public void ManiUI_GetMenu_btn()
+    {
+        contentUI[0].SetActive(false); //첫 번째 메인화면 넘기기
+        contentUI[1].SetActive(true); //회원가입 켠다
+        UIManager.Instance.number = 2;
+    }
+
     //회원가입 버튼
     public void Join_GetMenu_btn()
     {
+        UIManager.Instance.number = 3;
         contentUI[1].SetActive(false); //로그인 끄고
         contentUI[2].SetActive(true); //회원가입 켠다
     }
@@ -83,9 +103,21 @@ public class Main_UI : MonoBehaviour
         DataManager.datamg.request = join; //데이터 매니저에 저장하기
         HTTPMnanger.htpmg.PostJoin(join).Forget(); //통신에 요청보내기
 
-
         //귀찮으니까 통신이 잘됐던 안됐던 걍 넘어갑시다
         contentUI[2].SetActive(false);
         contentUI[3].SetActive(true);
+        UIManager.Instance.number = 1;
     }
+
+
+    public void GoToIntro_btn()
+    {
+        print("버튼 클릭 1");
+
+        contentUI[2].SetActive(false);
+        contentUI[3].SetActive(true);
+        UIManager.Instance.number = 1;
+    }
+
+
 }
