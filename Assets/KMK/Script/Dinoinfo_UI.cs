@@ -77,6 +77,7 @@ public class Dinoinfo_UI : MonoBehaviour
             {
                 dinoInfoList[i].gameObject.SetActive(false);
             }
+            chatLogUi.SetActive(false );
             micUi.SetActive(true); //마이크 켜기
 
             //녹음 로직
@@ -97,7 +98,7 @@ public class Dinoinfo_UI : MonoBehaviour
             File.WriteAllBytes(filePath, recordedSound);
 
             //녹음 다 되면 통신 ㄱㄱ
-            //HTTPMnanger.htpmg.MakeClass(recordedSound).Forget();
+            HTTPMnanger.htpmg.MakeClass(recordedSound).Forget();
             Debug.Log("녹음 파일 캐치완료! AI 전송중. . .");
         }
     }

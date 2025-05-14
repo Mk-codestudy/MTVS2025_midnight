@@ -154,7 +154,7 @@ public class HTTPMnanger : MonoBehaviour
         if (response.HasValue)
         {
             DataManager.datamg.responseAI = response.Value;
-            Debug.Log($"ResponseAI: {response}");
+            Debug.Log($"ResponseAI: {response.Value}");
             //챗봇 스택추가하기
             isAiRepeated = true;
         }
@@ -187,6 +187,7 @@ public class HTTPMnanger : MonoBehaviour
             if (request.result == UnityWebRequest.Result.Success)
             {
                 Debug.Log("Success: " + request.downloadHandler.text);
+
                 // 3. 멀티파트 응답 파싱
                 return ParseMultipartResponse(request);
 
