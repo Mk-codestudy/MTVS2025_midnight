@@ -384,6 +384,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: pbr_velociraptor_animated
       objectReference: {fileID: 0}
+    - target: {fileID: 2105071833359537768, guid: c48260db2df5b95479d4787ea1b504d3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -441,6 +445,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8758432830775992206, guid: d77e1f007e094a74f8c4faf8abdd59a4, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 0b3dc5c5a4c2aa641ad7eb30db5a2be6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -497,6 +505,10 @@ PrefabInstance:
     - target: {fileID: 1815643731483558120, guid: d7dc0992dc7b1434a883fc432c074ca0, type: 3}
       propertyPath: m_Name
       value: Triceratops
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815643731483558120, guid: d7dc0992dc7b1434a883fc432c074ca0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

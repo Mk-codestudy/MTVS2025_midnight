@@ -25,7 +25,4 @@ ScriptedImporter:
     lightIntensityFactor: 1
     sceneObjectCreation: 2
   assetDependencies: []
-  reportItems:
-  - type: 3
-    code: 36
-    messages: []
+  reportItems: []
