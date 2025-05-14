@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
     private Main_UI main_UI;
     public Dinoinfo_UI dinoinfo_UI;
     public Select_DinoList select_DinoList;
+    public GameObject Content_Response;
 
     public List<GameObject> uiObjects;
 
@@ -54,6 +55,10 @@ public class UIManager : MonoBehaviour
             main_UI = uiObjects[0].GetComponent<Main_UI>();
             main_UI.ManiUI_GetMenu_btn();
         }
+        else if(number == 0 && OVRInput.GetDown(OVRInput.RawButton.B))
+        {
+            QuitGame();
+        }
         else if (number == 1 && OVRInput.GetDown(OVRInput.RawButton.A))
         {
             main_UI.Go_to_List_GetMenu_btn();
@@ -79,10 +84,29 @@ public class UIManager : MonoBehaviour
         {
             dinoinfo_UI.dinoInfoList[currentdinosaurnum].SetActive(false);
             select_DinoList.CloseModel(currentdinosaurnum);
+            Content_Response.SetActive(false);
             number = 4;
             SetOnOffUI(1, false);
             SetOnOffUI(0, true);
         }
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_ANDROID && !UNITY_EDITOR
+        // Android 기기 (메타 퀘스트 포함)에서 종료
+        AndroidJavaObject activity = null;
+
+        using (AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+
+        activity.Call("finish");
+#else
+        // 에디터나 PC 환경에선 그냥 종료
+        Application.Quit();
+#endif
     }
 
     public void SetDinosaurUI(int num, bool open)

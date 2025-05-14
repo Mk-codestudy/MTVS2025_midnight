@@ -15,6 +15,13 @@ public class RecordSoundCenter : MonoBehaviour
     private void Start()
     {
         audios = GetComponent<AudioSource>();
+
+        foreach (var device in Microphone.devices)
+        {
+            Debug.Log("🎤 마이크 디바이스: " + device);
+            micName = device;
+        }
+
     }
 
 

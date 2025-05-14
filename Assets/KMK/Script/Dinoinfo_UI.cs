@@ -62,7 +62,7 @@ public class Dinoinfo_UI : MonoBehaviour
             chatLogUi.SetActive(true);
 
             //챗봇 음성 틀어주기
-            soundCenter.audios.Play();
+            //soundCenter.audios.Play();
         }
 
     }
@@ -70,7 +70,8 @@ public class Dinoinfo_UI : MonoBehaviour
     void PressRecord()
     {
         // 중지 키를 누르면 녹음이다. 우선 개발 중인 지금은 R 키를 눌러서 녹음한다. 알아서 바꿔주씨오
-        if (Input.GetKeyDown(KeyCode.R)) //R 키를 누르면 녹음시작
+        if (OVRInput.GetDown(OVRInput.RawButton.RHandTrigger)) // 오른쪽 중간 트리거 누르기 시작 //R 키를 누르면 녹음시작
+        //if (Input.GetKeyDown(KeyCode.R)) //R 키를 누르면 녹음시작
         {
             //UI 조작
             for (int i = 0; i < dinoInfoList.Length; i++) //다이노 인포리스트는 전부 끄기
@@ -85,19 +86,27 @@ public class Dinoinfo_UI : MonoBehaviour
             soundCenter.StartRecording();
 
         }
-        else if (Input.GetKeyUp(KeyCode.R)) // R키를 누르면 녹음종료
+        else if (OVRInput.GetUp(OVRInput.RawButton.RHandTrigger)) // 오른쪽 중간 트리거로 녹음 종료
         {
-            //UI조작
+            // UI 조작
             micUi.SetActive(false);
-            convertingUi.SetActive(true); //로딩중!!!
+            convertingUi.SetActive(true); // 로딩중!!!
 
-            //녹음 로직
+            // 녹음 로직
             byte[] recordedSound = soundCenter.StopRecording();
 
-            string filePath = "C:/Users/sapph/Documents/recorded.wav";
-            File.WriteAllBytes(filePath, recordedSound);
+            // 플랫폼에 따라 저장 경로 다르게 설정
+#if UNITY_ANDROID && !UNITY_EDITOR
+    string filePath = Path.Combine(Application.persistentDataPath, "recorded.wav");
+#else
+            string filePath = "C:/Users/mana9/Documents/recorded.wav";
+#endif
 
-            //녹음 다 되면 통신 ㄱㄱ
+            // 파일 저장
+            File.WriteAllBytes(filePath, recordedSound);
+            Debug.Log($"🎙 WAV 저장 경로: {filePath}");
+
+            // 녹음 완료 후 통신 전송
             HTTPMnanger.htpmg.MakeClass(recordedSound).Forget();
             Debug.Log("녹음 파일 캐치완료! AI 전송중. . .");
         }
