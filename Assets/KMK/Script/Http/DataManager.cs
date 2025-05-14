@@ -39,7 +39,7 @@ public struct PostQuest
     public int userid;
     public string requesttime;
     public int dinoid;
-    public string voice;
+    public byte[] voice;
 }
 
 [Serializable]
@@ -48,8 +48,9 @@ public struct ResponseAI
     public int userid;
     public int dinoid;
     public string responsetime;
+    public string request;
     public string response;
-    public string rseponseTTS;
+    public byte[] rseponseTTS;
 }
 
 
@@ -63,6 +64,9 @@ public class DataManager : MonoBehaviour
 
     public UserLogin userLogin;
     public UserLoginResponse userLoginResponse;
+
+    public PostQuest postQuest;
+    public ResponseAI responseAI;
 
     private void Awake()
     {
