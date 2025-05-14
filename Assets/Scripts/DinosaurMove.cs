@@ -9,8 +9,13 @@ public class DinosaurMove : MonoBehaviour
     private NavMeshAgent agent;
     private int current_num;
 
-    
-    
+    public VRTestScript vrTestScript;
+
+    private void Awake()
+    {
+        vrTestScript = GameObject.FindFirstObjectByType<VRTestScript>();
+    }
+
 
     public void StartMove(int num)
     {
@@ -53,6 +58,10 @@ public class DinosaurMove : MonoBehaviour
             agent.ResetPath();
             agent.velocity = Vector3.zero;
             dinosaurAnimationScript.SetAnimation(2);
+            if (vrTestScript != null)
+            {
+                vrTestScript.isTurnScene = true;
+            }
         }
     }
 

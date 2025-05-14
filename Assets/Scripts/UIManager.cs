@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -18,11 +20,16 @@ public class UIManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject); // 씬 이동해도 유지
     }
+
+
     private Main_UI main_UI;
+    public Dinoinfo_UI dinoinfo_UI;
+    public Select_DinoList select_DinoList;
 
     public List<GameObject> uiObjects;
+
+    public int currentdinosaurnum = 0;
 
     public int number = 0;
 
@@ -64,6 +71,34 @@ public class UIManager : MonoBehaviour
         {
 
         }
+        else if (number == 5 && OVRInput.GetDown(OVRInput.RawButton.A))
+        {
+            GameManager.Instance.MoveScene("MapScene");
+        }
+        else if (number == 5 && OVRInput.GetDown(OVRInput.RawButton.B))
+        {
+            dinoinfo_UI.dinoInfoList[currentdinosaurnum].SetActive(false);
+            select_DinoList.CloseModel(currentdinosaurnum);
+            number = 4;
+            SetOnOffUI(1, false);
+            SetOnOffUI(0, true);
+        }
+    }
+
+    public void SetDinosaurUI(int num, bool open)
+    {
+        if (num == 0)
+        {
+            dinoinfo_UI.dinoInfoList[num].SetActive(open);
+        }
+        else if (num == 1)
+        {
+            dinoinfo_UI.dinoInfoList[num].SetActive(open);
+        }
+        else if (num == 2)
+        {
+            dinoinfo_UI.dinoInfoList[num].SetActive(open);
+        }
     }
 
     public void SelectLoginOrJoin()
@@ -74,11 +109,13 @@ public class UIManager : MonoBehaviour
         {
             if (rightStick.x < -0.5f)
             {
+                print("왼쪽 이동");
                 CurrentButtonChange(loginButton);
                 hasSelected = true;
             }
             else if (rightStick.x > 0.5f)
             {
+                print("오른쪽 이동");
                 CurrentButtonChange(joinButton);
                 hasSelected = true;
             }
@@ -90,7 +127,10 @@ public class UIManager : MonoBehaviour
             hasSelected = false;
         }
 
-        CurrentButtonClick(currentButton);
+        if (currentButton != null && OVRInput.GetDown(OVRInput.RawButton.A))
+        {
+            CurrentButtonClick(currentButton);
+        }
     }
 
 
@@ -102,14 +142,12 @@ public class UIManager : MonoBehaviour
 
     public void CurrentButtonClick(Button button)
     {
-        if (OVRInput.GetDown(OVRInput.RawButton.A))
+        if (button != null && OVRInput.GetDown(OVRInput.RawButton.A))
         {
-            if (currentButton == button)
-            {
-                button.onClick.Invoke(); // 버튼 클릭 이벤트 실행
-            }
+            button.onClick.Invoke();
         }
     }
+
 
 
 
@@ -120,8 +158,6 @@ public class UIManager : MonoBehaviour
         uiObjects[num].SetActive(open);
     }
 
-    public void MoveScene(int num)
-    {
-        SceneManager.LoadScene(num);
-    }
+    
+
 }
